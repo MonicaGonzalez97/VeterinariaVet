@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VetCare | Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="huella" viewBox="0 0 64 64">
+      <ellipse cx="13" cy="29" rx="7" ry="9" transform="rotate(-20 13 29)"/>
+      <ellipse cx="25" cy="16" rx="7" ry="10"/>
+      <ellipse cx="40" cy="16" rx="7" ry="10"/>
+      <ellipse cx="52" cy="29" rx="7" ry="9" transform="rotate(20 52 29)"/>
+      <path d="M32 31c-10 0-19 10-19 19 0 7 6 10 12 9 4-1 5-2 7-2s3 1 7 2c6 1 12-2 12-9 0-9-9-19-19-19z"/>
+    </symbol>
+  </svg>
+
+  <header class="barra">
+    <div class="logotipo"><svg class="icono"><use href="#huella"/></svg> VetCare</div>
+    <nav class="pestanas" role="tablist" aria-label="Secciones">
+      <button class="pestana" role="tab" aria-selected="true" data-vista="clientes">Clientes</button>
+      <button class="pestana" role="tab" aria-selected="false" data-vista="mascotas">Mascotas</button>
+      <button class="pestana" role="tab" aria-selected="false" data-vista="memorial">Memorial</button>
+    </nav>
+    <div class="usuario">
+      <span class="usuario__nombre" id="nombreUsuario"></span>
+      <span class="insignia" id="rolUsuario"></span>
+      <button class="boton boton--suave boton--chico" id="botonSalir" type="button">Cerrar sesion</button>
+    </div>
+  </header>
+
+  <main class="contenido">
+    <!-- ===== Clientes ===== -->
+    <section id="vista-clientes">
+      <div class="encabezado-vista">
+        <div>
+          <h2>Clientes</h2>
+          <p>Dueños de las mascotas que atiende la clinica.</p>
+        </div>
+        <div class="herramientas">
+          <input id="buscarCliente" type="search" placeholder="Buscar por nombre o documento" aria-label="Buscar cliente">
+          <button class="boton boton--naranja" id="botonNuevoCliente" type="button" data-escritura>Nuevo cliente</button>
+        </div>
+      </div>
+      <div class="tabla-envoltura">
+        <table>
+          <thead><tr><th>Nombre</th><th>Documento</th><th>Telefono</th><th>Correo</th><th></th></tr></thead>
+          <tbody id="cuerpoClientes"></tbody>
+        </table>
+      </div>
+      <div id="vacioClientes" class="vacio" hidden>
+        <svg class="icono"><use href="#huella"/></svg>
+        <p>Todavia no hay clientes que coincidan. Registre el primero con el boton Nuevo cliente.</p>
+      </div>
+    </section>
+
+    <!-- ===== Mascotas ===== -->
+    <section id="vista-mascotas" hidden>
+      <div class="encabezado-vista">
+        <div>
+          <h2>Mascotas</h2>
+          <p>Pacientes activos de la clinica.</p>
+        </div>
+        <div class="herramientas">
+          <select id="filtroCliente" aria-label="Filtrar por cliente"><option value="">Todos los clientes</option></select>
+          <button class="boton boton--naranja" id="botonNuevaMascota" type="button" data-escritura>Nueva mascota</button>
+        </div>
+      </div>
+      <div id="cuadriculaMascotas" class="cuadricula"></div>
+      <div id="vacioMascotas" class="vacio" hidden>
+        <svg class="icono"><use href="#huella"/></svg>
+        <p>No hay mascotas activas para este filtro.</p>
+      </div>
+    </section>
+
+    <!-- ===== Memorial ===== -->
+    <section id="vista-memorial" hidden>
+      <div class="encabezado-vista">
+        <div>
+          <h2>Memorial</h2>
+          <p>Mascotas que ya no estan. Su historial se conserva y nunca se borra.</p>
+        </div>
+      </div>
+      <div id="cuadriculaMemorial" class="cuadricula"></div>
+      <div id="vacioMemorial" class="vacio" hidden>
+        <svg class="icono"><use href="#huella"/></svg>
+        <p>El memorial esta vacio.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Dialogo cliente ===== -->
+  <dialog id="dialogoCliente">
+    <form id="formCliente" novalidate>
+      <div class="dialogo__cabecera"><h3 id="tituloCliente">Nuevo cliente</h3></div>
+      <div class="dialogo__cuerpo">
+        <p class="mensaje-error" id="errorCliente" role="alert" hidden></p>
+        <input type="hidden" id="clienteId">
+        <div class="rejilla-2">
+          <div class="campo"><label for="clienteNombre">Nombre</label><input id="clienteNombre" required></div>
+          <div class="campo"><label for="clienteApellido">Apellido</label><input id="clienteApellido" required></div>
+          <div class="campo"><label for="clienteDocumento">Documento (DPI)</label><input id="clienteDocumento" inputmode="numeric" maxlength="13" required><small>13 digitos</small></div>
+          <div class="campo"><label for="clienteTelefono">Telefono</label><input id="clienteTelefono" inputmode="numeric" maxlength="8" required><small>8 digitos</small></div>
+        </div>
+        <div class="campo"><label for="clienteCorreo">Correo (opcional)</label><input id="clienteCorreo" type="email"></div>
+        <div class="campo"><label for="clienteDireccion">Direccion (opcional)</label><input id="clienteDireccion"></div>
+      </div>
+      <div class="dialogo__pie">
+        <button class="boton boton--suave" type="button" data-cerrar>Cancelar</button>
+        <button class="boton" type="submit">Guardar cliente</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ===== Dialogo mascota ===== -->
+  <dialog id="dialogoMascota">
+    <form id="formMascota" novalidate>
+      <div class="dialogo__cabecera"><h3 id="tituloMascota">Nueva mascota</h3></div>
+      <div class="dialogo__cuerpo">
+        <p class="mensaje-error" id="errorMascota" role="alert" hidden></p>
+        <input type="hidden" id="mascotaId">
+        <div class="rejilla-2">
+          <div class="campo"><label for="mascotaNombre">Nombre</label><input id="mascotaNombre" required></div>
+          <div class="campo"><label for="mascotaCliente">Dueño</label><select id="mascotaCliente" required></select></div>
+          <div class="campo"><label for="mascotaEspecie">Especie</label><select id="mascotaEspecie" required></select></div>
+          <div class="campo"><label for="mascotaRaza">Raza</label><select id="mascotaRaza" required></select></div>
+          <div class="campo"><label for="mascotaSexo">Sexo</label>
+            <select id="mascotaSexo" required><option value="Macho">Macho</option><option value="Hembra">Hembra</option></select></div>
+          <div class="campo"><label for="mascotaNacimiento">Fecha de nacimiento</label><input id="mascotaNacimiento" type="date"></div>
+          <div class="campo"><label for="mascotaPeso">Peso (kg)</label><input id="mascotaPeso" type="number" step="0.01" min="0.01" max="200"></div>
+          <div class="campo"><label for="mascotaColor">Color</label><input id="mascotaColor"></div>
+        </div>
+      </div>
+      <div class="dialogo__pie">
+        <button class="boton boton--suave" type="button" data-cerrar>Cancelar</button>
+        <button class="boton" type="submit">Guardar mascota</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ===== Dialogo fallecimiento ===== -->
+  <dialog id="dialogoFallecimiento">
+    <form id="formFallecimiento" novalidate>
+      <div class="dialogo__cabecera"><h3 id="tituloFallecimiento">Registrar fallecimiento</h3></div>
+      <div class="dialogo__cuerpo">
+        <p class="dialogo__aviso">La mascota saldra de la lista activa y pasara al Memorial. Su historial se conserva.</p>
+        <p class="mensaje-error" id="errorFallecimiento" role="alert" hidden></p>
+        <input type="hidden" id="fallecimientoId">
+        <div class="campo"><label for="fallecimientoFecha">Fecha de fallecimiento</label><input id="fallecimientoFecha" type="date" required></div>
+        <div class="campo"><label for="fallecimientoCausa">Causa (opcional)</label><input id="fallecimientoCausa" maxlength="200"></div>
+        <div class="campo"><label for="fallecimientoObservaciones">Observaciones (opcional)</label><textarea id="fallecimientoObservaciones" rows="3" maxlength="500"></textarea></div>
+      </div>
+      <div class="dialogo__pie">
+        <button class="boton boton--suave" type="button" data-cerrar>Cancelar</button>
+        <button class="boton boton--peligro" type="submit">Registrar fallecimiento</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="avisos" aria-live="polite"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/panel.js"></script>
+</body>
+</html>

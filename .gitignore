@@ -1,5 +1,8 @@
 .vs/
 bin/
 obj/
+.idea/
 *.user
 *.suo
+appsettings.Development.json
+TestResults/

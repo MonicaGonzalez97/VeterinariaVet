@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VetCare | Acceso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="huella" viewBox="0 0 64 64">
+      <ellipse cx="13" cy="29" rx="7" ry="9" transform="rotate(-20 13 29)"/>
+      <ellipse cx="25" cy="16" rx="7" ry="10"/>
+      <ellipse cx="40" cy="16" rx="7" ry="10"/>
+      <ellipse cx="52" cy="29" rx="7" ry="9" transform="rotate(20 52 29)"/>
+      <path d="M32 31c-10 0-19 10-19 19 0 7 6 10 12 9 4-1 5-2 7-2s3 1 7 2c6 1 12-2 12-9 0-9-9-19-19-19z"/>
+    </symbol>
+  </svg>
+
+  <div class="acceso__contenedor">
+    <section class="acceso__marca">
+      <svg class="icono huella-fondo" style="top:6%;right:8%;transform:rotate(18deg)"><use href="#huella"/></svg>
+      <svg class="icono huella-fondo" style="bottom:10%;left:-30px;transform:rotate(-24deg);width:210px;height:210px"><use href="#huella"/></svg>
+      <div class="logotipo"><svg class="icono"><use href="#huella"/></svg> VetCare</div>
+      <h1>Cuidado veterinario, con corazon.</h1>
+      <svg class="latido" viewBox="0 0 600 130" role="img" aria-label="Linea de latido que termina en una huella">
+        <path class="linea" d="M0 80 H150 L172 30 L200 118 L226 52 L244 80 H400 C420 80 430 80 440 80"/>
+        <g class="huella-final" transform="translate(455 28) scale(1.35)"><use href="#huella" width="64" height="64"/></g>
+      </svg>
+      <p>Panel interno de la clinica para gestionar clientes, mascotas y el recuerdo de quienes ya no estan.</p>
+    </section>
+
+    <section class="acceso__formulario">
+      <div class="tarjeta">
+        <div class="pestanas pestanas--tarjeta" role="tablist">
+          <button class="pestana" role="tab" id="pestanaLogin" aria-selected="true" data-formulario="formLogin">Iniciar sesion</button>
+          <button class="pestana" role="tab" id="pestanaRegistro" aria-selected="false" data-formulario="formRegistro">Crear cuenta</button>
+        </div>
+
+        <p id="mensajeError" class="mensaje-error" role="alert" hidden></p>
+
+        <form id="formLogin" novalidate>
+          <h2>Bienvenida de vuelta</h2>
+          <p class="sub">Ingrese con su correo y contraseña.</p>
+          <div class="campo">
+            <label for="loginCorreo">Correo</label>
+            <input id="loginCorreo" type="email" autocomplete="username" required>
+          </div>
+          <div class="campo">
+            <label for="loginContraseña">Contraseña</label>
+            <input id="loginContraseña" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="boton boton--naranja" type="submit" style="width:100%">Entrar al panel</button>
+        </form>
+
+        <form id="formRegistro" novalidate hidden>
+          <h2>Cree su cuenta</h2>
+          <p class="sub">Las cuentas nuevas entran con el rol Recepcionista.</p>
+          <div class="campo">
+            <label for="registroNombre">Nombre completo</label>
+            <input id="registroNombre" type="text" autocomplete="name" required>
+          </div>
+          <div class="campo">
+            <label for="registroCorreo">Correo</label>
+            <input id="registroCorreo" type="email" autocomplete="email" required>
+          </div>
+          <div class="campo">
+            <label for="registroContraseña">Contraseña</label>
+            <input id="registroContraseña" type="password" autocomplete="new-password" minlength="8" required>
+            <small>Minimo 8 caracteres.</small>
+          </div>
+          <button class="boton boton--naranja" type="submit" style="width:100%">Crear cuenta y entrar</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/acceso.js"></script>
+</body>
+</html>
