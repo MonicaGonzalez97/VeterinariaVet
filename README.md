@@ -13,7 +13,7 @@ VetCare ("Vet" de veterinaria + "Care", cuidado) es una API pública protegida c
 ## Cómo levantar el proyecto
 
 1. Abra `VetCare.slnx` con Visual Studio 2026.
-2. Abra `VetCare.Api/appsettings.Development.json` y escriba la contraseña de su usuario de PostgreSQL en `Password=`. El usuario configurado es `sharoncanellon`; cámbielo si usa otro.
+2. Abra `VetCare.Api/appsettings.Development.json` y escriba la contraseña de su usuario de PostgreSQL en `Password=`. El usuario configurado es `Nombre_Estudiante`; cámbielo si usa otro.
 3. Presione **F5** (perfil `http`). La base de datos `vetcare` se crea sola al arrancar, junto con los roles, los usuarios de prueba y el catálogo de especies y razas.
 4. Se abre el frontend en `http://localhost:5080`. La documentación Swagger está en `http://localhost:5080/swagger`.
 
