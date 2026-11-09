@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "compilar-api",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["build", "${workspaceFolder}/VetCare.Api/VetCare.Api.csproj"],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "ejecutar-pruebas",
+      "command": "dotnet",
+      "type": "process",
+      "args": ["test", "${workspaceFolder}/VetCare.sln"],
+      "problemMatcher": "$msCompile",
+      "group": "test"
+    }
+  ]
+}
