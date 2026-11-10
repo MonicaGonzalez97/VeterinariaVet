@@ -28,9 +28,9 @@ dotnet test
 
 | Rol | Correo | Contraseña |
 |---|---|---|
-| Administrador | admin@vetcare.com | Admin12345* |
-| Veterinario | veterinario@vetcare.com | Vet12345* |
-| Recepcionista | recepcion@vetcare.com | Recepcion12345* |
+| Administrador | admin@vetcare.com | AdminVet_2026!Clave93 |
+| Veterinario | veterinario@vetcare.com | Veterinario_2026!Clave82 |
+| Recepcionista | recepcion@vetcare.com | Recepcion_2026!Clave71 |
 
 Cambie estas contraseñas en `appsettings.json` antes de publicar la API en la web.
 
